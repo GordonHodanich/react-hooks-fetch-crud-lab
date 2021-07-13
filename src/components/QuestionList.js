@@ -23,12 +23,25 @@ const handleDelete = (id) => (
     })
 )
 
+const handleAnswerChange = (newCorrectIndex, id) => (
+  fetch(`http://localhost:4000/questions/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      correctIndex: parseInt(newCorrectIndex)
+    })
+  })
+)
+
   const listOfQuestions = questions.map((question) => {
     return (
     <QuestionItem
       key={question.id}
       question={question}
       onHandleDelete={handleDelete}
+      onAnswerChange={handleAnswerChange}
     />
   )
 })
